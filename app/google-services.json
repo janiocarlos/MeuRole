@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "311780830536",
+    "project_id": "meurole-62fac",
+    "storage_bucket": "meurole-62fac.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311780830536:android:c1693b89754d0d1d9d577d",
+        "android_client_info": {
+          "package_name": "com.app.meurole"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvzcsMFQDIxpnGOlMk2OMxgai4HpxwcQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

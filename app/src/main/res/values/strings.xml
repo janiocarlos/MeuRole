@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">MeuRole</string>
+
+    <string name="titulo_login">Acessar</string>
+    <string name="hint_input_email">Email</string>
+    <string name="hint_input_senha">Senha</string>
+    <string name="text_button_entrar">Entrar</string>
+
+
+    <string name="titulo_cadastro">Cadastro de Usuário</string>
+
+    <string name="hint_input_nome_cadastro">Nome Completo</string>
+    <string name="hint_input_cidade_cadastro">Cidade</string>
+    <string name="hint_input_logradouro_cadastro">Logradouro</string>
+
+    <string name="hint_input_confirmar_senha_cadastro">Confirme a senha</string>
+    <string name="text_button_cadastar">Cadastrar</string>
+
+</resources>
