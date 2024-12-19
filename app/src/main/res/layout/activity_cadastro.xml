@@ -33,11 +33,36 @@
         />
 
     <EditText
+        android:id="@+id/cpf_cadastro"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:hint="CPF"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nome_cadastro"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/dob_cadastro"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:focusable="false"
+        android:inputType="date"
+        android:hint="Data de Nascimento"
+        app:layout_constraintTop_toBottomOf="@id/cpf_cadastro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"/>
+
+
+
+    <EditText
         android:id="@+id/email_cadastro"
         android:layout_width="320dp"
         android:layout_height="40dp"
         android:hint="@string/hint_input_email"
-        app:layout_constraintTop_toBottomOf="@id/nome_cadastro"
+        app:layout_constraintTop_toBottomOf="@id/dob_cadastro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="20dp" />
@@ -66,6 +91,8 @@
         android:inputType="textPassword"
         />
 
+
+
     <Button
         android:id="@+id/botao_cadastro"
         android:layout_width="250dp"
@@ -76,6 +103,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/confirmar_senha_cadastro"
         android:layout_marginTop="30dp" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

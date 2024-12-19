@@ -18,12 +18,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 public class login extends AppCompatActivity {
 
     private TextView titulo_login,language_login,novo_usuario;
     private EditText email_login, senha_login;
     private Button botao_login;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,9 @@ public class login extends AppCompatActivity {
         senha_login = findViewById(R.id.senha_login);
         botao_login = findViewById(R.id.botao_login);
         novo_usuario = findViewById(R.id.novo_usuario);
+
+
+
 
         language_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,13 +86,21 @@ public class login extends AppCompatActivity {
                 email = email_login.getText().toString();
                 senha = senha_login.getText().toString();
 
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(email,senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                auth.signInWithEmailAndPassword(email,senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            String uid = auth.getCurrentUser().getUid();
+                            database.child("usuarios").child(uid).get().addOnCompleteListener(task2 -> {
+                                if(task2.isSuccessful()) {
+                                    Usuario usuario = task2.getResult().getValue(Usuario.class);
+                                    titulo_login.setText("Olá, "+usuario.getNome());
+                                }
+                            });
+
+
                             email_login.setVisibility(View.INVISIBLE);
                             senha_login.setVisibility(View.INVISIBLE);
-                            titulo_login.setText("LOGADO");
                             botao_login.setVisibility(View.INVISIBLE);
                         }
                     }
@@ -91,4 +108,6 @@ public class login extends AppCompatActivity {
             }
         });
     }
+
+
 }

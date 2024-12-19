@@ -1,5 +1,6 @@
 package com.app.meurole;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -23,11 +25,19 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class cadastro extends AppCompatActivity {
 
-    private EditText email_cadastro,senha_cadastro;
+    private EditText nome_cadastro,email_cadastro,senha_cadastro,dob_cadastro,cpf_cadastro,confirmar_senha_cadastro;
     private Button botao_cadastro;
+
+    DatabaseReference database;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +50,40 @@ public class cadastro extends AppCompatActivity {
             return insets;
         });
 
+        database = FirebaseDatabase.getInstance().getReference();
+
+        nome_cadastro = findViewById(R.id.nome_cadastro);
         email_cadastro = findViewById(R.id.email_cadastro);
         senha_cadastro = findViewById(R.id.senha_cadastro);
         botao_cadastro = findViewById(R.id.botao_cadastro);
+        dob_cadastro = findViewById(R.id.dob_cadastro);
+        cpf_cadastro = findViewById(R.id.cpf_cadastro);
+        confirmar_senha_cadastro = findViewById(R.id.confirmar_senha_cadastro);
+
+        dob_cadastro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Obter a data atual
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                // Criar o DatePickerDialog
+                DatePickerDialog datePicker = new DatePickerDialog(
+                        cadastro.this,
+                        (view, selectedYear, selectedMonth, selectedDay) -> {
+                            // Formatar a data no estilo "dd/MM/yyyy"
+                            String formattedDate = String.format("%02d/%02d/%d", selectedDay, selectedMonth + 1, selectedYear);
+                            dob_cadastro.setText(formattedDate);
+                        },
+                        year, month, day
+                );
+
+                // Exibir o DatePickerDialog
+                datePicker.show();
+            }
+        });
 
         botao_cadastro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,18 +93,31 @@ public class cadastro extends AppCompatActivity {
                 if(imm.isActive())
                     imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY,0);
 
-                String email, senha;
+                String nome,cpf,email, senha,confirma_senha;
+                Date dob;
+                nome = nome_cadastro.getText().toString();
+                cpf = cpf_cadastro.getText().toString();
                 email = email_cadastro.getText().toString();
                 senha = senha_cadastro.getText().toString();
+                confirma_senha = confirmar_senha_cadastro.getText().toString();
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(2003,Calendar.JUNE,23);
+                dob = calendar.getTime();
 
-                if(email.isEmpty() || senha.isEmpty()){
+                Usuario usuario = new Usuario(nome,cpf,dob,email);
+
+            if(email.isEmpty() || senha.isEmpty()){
                     Snackbar msg = Snackbar.make(v,"Preencha os campos corretamente",Snackbar.LENGTH_SHORT);
                     msg.setBackgroundTint(Color.RED);
                     msg.setTextColor(Color.WHITE);
                     msg.show();
-                }
-                else{
-                    CadastrarUuario(v,email,senha);
+                } else if (!senha.equals(confirma_senha)) {
+                    Snackbar msg = Snackbar.make(v,"Senhas não conferem",Snackbar.LENGTH_SHORT);
+                    msg.setBackgroundTint(Color.RED);
+                    msg.setTextColor(Color.WHITE);
+                    msg.show();
+                } else{
+                    CadastrarUsuarioAuth(v,usuario,senha);
                     Intent intent = new Intent(cadastro.this, login.class);
                     startActivity(intent);
                     finish();
@@ -74,15 +128,17 @@ public class cadastro extends AppCompatActivity {
 
     }
 
-    public void CadastrarUuario(View v, String email, String senha){
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+    public void CadastrarUsuarioAuth(View v, Usuario usuario, String senha){
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(usuario.getEmail(), senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Snackbar msg = Snackbar.make(v,"Usuário Cadastrado",Snackbar.LENGTH_SHORT);
-                    msg.setBackgroundTint(Color.GREEN);
-                    msg.setTextColor(Color.WHITE);
-                    msg.show();
+                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    CadastrarUsuario(v,uid,usuario);
+                    //Snackbar msg = Snackbar.make(v,"Usuário Cadastrado",Snackbar.LENGTH_SHORT);
+                    //msg.setBackgroundTint(Color.GREEN);
+                    //msg.setTextColor(Color.WHITE);
+                    //msg.show();
                 }else{
                     String erro;
 
@@ -109,4 +165,16 @@ public class cadastro extends AppCompatActivity {
         });
     }
 
+    public void CadastrarUsuario(View v,String uid,Usuario usuario){
+        database.child("usuarios").child(uid).setValue(usuario).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(v.getContext(),"Dados salvos",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(v.getContext(), "Erro ao salvar cliente.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 }
