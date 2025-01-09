@@ -1,4 +1,4 @@
-package com.app.meurole;
+package com.app.meurole.view;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -17,6 +17,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.app.meurole.R;
+import com.app.meurole.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -31,7 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Calendar;
 import java.util.Date;
 
-public class cadastro extends AppCompatActivity {
+public class UserCreateActivity extends AppCompatActivity {
 
     private EditText nome_cadastro,email_cadastro,senha_cadastro,dob_cadastro,cpf_cadastro,confirmar_senha_cadastro;
     private Button botao_cadastro;
@@ -43,7 +45,7 @@ public class cadastro extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_cadastro);
+        setContentView(R.layout.activity_user_create);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -71,7 +73,7 @@ public class cadastro extends AppCompatActivity {
 
                 // Criar o DatePickerDialog
                 DatePickerDialog datePicker = new DatePickerDialog(
-                        cadastro.this,
+                        UserCreateActivity.this,
                         (view, selectedYear, selectedMonth, selectedDay) -> {
                             // Formatar a data no estilo "dd/MM/yyyy"
                             String formattedDate = String.format("%02d/%02d/%d", selectedDay, selectedMonth + 1, selectedYear);
@@ -104,7 +106,7 @@ public class cadastro extends AppCompatActivity {
                 calendar.set(2003,Calendar.JUNE,23);
                 dob = calendar.getTime();
 
-                Usuario usuario = new Usuario(nome,cpf,dob,email);
+                User user = new User(nome,cpf,dob,email);
 
             if(email.isEmpty() || senha.isEmpty()){
                     Snackbar msg = Snackbar.make(v,"Preencha os campos corretamente",Snackbar.LENGTH_SHORT);
@@ -117,8 +119,8 @@ public class cadastro extends AppCompatActivity {
                     msg.setTextColor(Color.WHITE);
                     msg.show();
                 } else{
-                    CadastrarUsuarioAuth(v,usuario,senha);
-                    Intent intent = new Intent(cadastro.this, login.class);
+                    CadastrarUsuarioAuth(v, user,senha);
+                    Intent intent = new Intent(UserCreateActivity.this, UserLoginActivity.class);
                     startActivity(intent);
                     finish();
 
@@ -128,13 +130,13 @@ public class cadastro extends AppCompatActivity {
 
     }
 
-    public void CadastrarUsuarioAuth(View v, Usuario usuario, String senha){
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(usuario.getEmail(), senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+    public void CadastrarUsuarioAuth(View v, User user, String senha){
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(user.getEmail(), senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    CadastrarUsuario(v,uid,usuario);
+                    CadastrarUsuario(v,uid, user);
                     //Snackbar msg = Snackbar.make(v,"Usuário Cadastrado",Snackbar.LENGTH_SHORT);
                     //msg.setBackgroundTint(Color.GREEN);
                     //msg.setTextColor(Color.WHITE);
@@ -165,8 +167,8 @@ public class cadastro extends AppCompatActivity {
         });
     }
 
-    public void CadastrarUsuario(View v,String uid,Usuario usuario){
-        database.child("usuarios").child(uid).setValue(usuario).addOnCompleteListener(new OnCompleteListener<Void>() {
+    public void CadastrarUsuario(View v, String uid, User user){
+        database.child("usuarios").child(uid).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {

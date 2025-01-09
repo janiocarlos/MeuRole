@@ -1,4 +1,4 @@
-package com.app.meurole;
+package com.app.meurole.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.app.meurole.MainActivity;
+import com.app.meurole.R;
+import com.app.meurole.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,9 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.concurrent.atomic.AtomicReference;
-
-public class login extends AppCompatActivity {
+public class UserLoginActivity extends AppCompatActivity {
 
     private TextView titulo_login,language_login,novo_usuario;
     private EditText email_login, senha_login;
@@ -35,7 +36,7 @@ public class login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_user_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -72,7 +73,7 @@ public class login extends AppCompatActivity {
         novo_usuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(login.this, cadastro.class);
+                Intent intent = new Intent(UserLoginActivity.this, UserCreateActivity.class);
                 startActivity(intent);
 
                 finish();
@@ -91,17 +92,20 @@ public class login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             String uid = auth.getCurrentUser().getUid();
-                            database.child("usuarios").child(uid).get().addOnCompleteListener(task2 -> {
-                                if(task2.isSuccessful()) {
-                                    Usuario usuario = task2.getResult().getValue(Usuario.class);
-                                    titulo_login.setText("Olá, "+usuario.getNome());
-                                }
-                            });
 
+                            String eventId = getIntent().getStringExtra("EXTRA_EVENT_ID");
 
-                            email_login.setVisibility(View.INVISIBLE);
-                            senha_login.setVisibility(View.INVISIBLE);
-                            botao_login.setVisibility(View.INVISIBLE);
+                            if (eventId != null) {
+                                // Volta para a tela de detalhe do evento
+                                Intent intent = new Intent(UserLoginActivity.this, EventDetailActivity.class);
+                                intent.putExtra("EVENT_ID", eventId);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                // Se não recebeu eventId, talvez vá para a tela principal do app
+                                startActivity(new Intent(UserLoginActivity.this, EventListActivity.class));
+                                finish();
+                            }
                         }
                     }
                 });

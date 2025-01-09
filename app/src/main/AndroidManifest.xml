@@ -28,10 +28,10 @@
             android:name=".MainActivity2"
             android:exported="false" />
         <activity
-            android:name=".login"
+            android:name=".view.UserLoginActivity"
             android:exported="false" />
         <activity
-            android:name=".cadastro"
+            android:name=".view.UserCreateActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

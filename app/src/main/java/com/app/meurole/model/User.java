@@ -1,16 +1,16 @@
-package com.app.meurole;
+package com.app.meurole.model;
 
 import java.util.Date;
 
-public class Usuario {
+public class User {
     private String nome;
     private String CPF;
     private Date dob;
     private String email;
 
-    public Usuario() {}
+    public User() {}
 
-    public Usuario(String nome, String CPF, Date dob, String email) {
+    public User(String nome, String CPF, Date dob, String email) {
         this.nome = nome;
         this.CPF = CPF;
         this.dob = dob;
