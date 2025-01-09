@@ -33,6 +33,7 @@ public class EventListActivity extends AppCompatActivity {
     // Referência para o nó "eventos" no Firebase
     private DatabaseReference eventsRef;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

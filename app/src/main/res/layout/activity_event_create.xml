@@ -36,11 +36,35 @@
         android:inputType="numberDecimal" />
 
     <!-- Botão para cadastrar -->
+
+    <Spinner
+        android:id="@+id/SpinnerTipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/spinnerItems"
+        android:spinnerMode="dropdown"/>
+
+    <TextView
+        android:id="@+id/labelThumb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nenhum arquivo selecionado"/>
+
+    <Button
+        android:id="@+id/BotaoThumb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#C1BFBF"
+        android:text="Selecione uma imagem"/>
+
+
     <Button
         android:id="@+id/buttonCadastrarEvento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cadastrar Evento"
         android:layout_marginTop="16dp" />
+
+
 
 </LinearLayout>
