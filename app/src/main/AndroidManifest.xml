@@ -13,6 +13,18 @@
         android:theme="@style/Theme.MeuRole"
         tools:targetApi="31">
         <activity
+            android:name=".view.EventCreateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.EventDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.EventListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EventoLista"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity2"
             android:exported="false" />
         <activity

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Nome do evento -->
+    <TextView
+        android:id="@+id/textViewDetalheNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nome do Evento"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:paddingBottom="8dp"/>
+
+    <!-- Data do evento -->
+    <TextView
+        android:id="@+id/textViewDetalheData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Data do Evento"
+        android:textSize="16sp"
+        android:paddingBottom="4dp"/>
+
+    <!-- Local do evento -->
+    <TextView
+        android:id="@+id/textViewDetalheLocal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Local do Evento"
+        android:textSize="16sp"
+        android:paddingBottom="4dp"/>
+
+    <!-- Valor da inscrição -->
+    <TextView
+        android:id="@+id/textViewDetalheValor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Valor da Inscrição"
+        android:textSize="16sp"
+        android:paddingBottom="8dp"/>
+
+    <!-- Botão para confirmar inscrição -->
+    <Button
+        android:id="@+id/buttonConfirmarInscricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirmar Inscrição"/>
+</LinearLayout>

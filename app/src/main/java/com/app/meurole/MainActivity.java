@@ -10,6 +10,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.app.meurole.view.EventCreateActivity;
+import com.app.meurole.view.EventListActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -30,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // Intent to start the new activity
-                Intent intent = new Intent(MainActivity.this, login.class);
+                Intent intent = new Intent(MainActivity.this, EventListActivity.class);
                 startActivity(intent);
 
                 // Optionally, finish the current activity if you don't want it to stay in the back stack
