@@ -91,8 +91,6 @@
         android:inputType="textPassword"
         />
 
-
-
     <Button
         android:id="@+id/botao_cadastro"
         android:layout_width="250dp"
@@ -103,8 +101,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/confirmar_senha_cadastro"
         android:layout_marginTop="30dp" />
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

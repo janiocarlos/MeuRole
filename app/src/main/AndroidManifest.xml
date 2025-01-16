@@ -20,16 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".view.EventCreateActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.EventDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.EventListActivity"
-            android:exported="false" />
         <activity
             android:name=".view.UserLoginActivity"
             android:exported="false" />
