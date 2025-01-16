@@ -8,28 +8,28 @@
 
     <!-- Campo para o nome do evento -->
     <EditText
-        android:id="@+id/editTextNome"
+        android:id="@+id/evento_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nome do Evento" />
 
     <!-- Campo para a data do evento -->
     <EditText
-        android:id="@+id/editTextData"
+        android:id="@+id/evento_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Data do Evento" />
 
     <!-- Campo para o local do evento -->
     <EditText
-        android:id="@+id/editTextLocal"
+        android:id="@+id/evento_local"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Local do Evento" />
 
     <!-- Campo para o valor da inscrição (pode ser numérico) -->
     <EditText
-        android:id="@+id/editTextValor"
+        android:id="@+id/evento_valor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Valor da Inscrição (Ex: 0.00)"
@@ -38,7 +38,7 @@
     <!-- Botão para cadastrar -->
 
     <Spinner
-        android:id="@+id/SpinnerTipo"
+        android:id="@+id/evento_tipo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/spinnerItems"
@@ -51,7 +51,7 @@
         android:text="Nenhum arquivo selecionado"/>
 
     <Button
-        android:id="@+id/BotaoThumb"
+        android:id="@+id/evento_botao_thumb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#C1BFBF"
@@ -59,7 +59,7 @@
 
 
     <Button
-        android:id="@+id/buttonCadastrarEvento"
+        android:id="@+id/evento_botao_cadastrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cadastrar Evento"

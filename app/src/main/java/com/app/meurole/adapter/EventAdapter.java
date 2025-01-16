@@ -1,30 +1,32 @@
 package com.app.meurole.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.meurole.R;
 import com.app.meurole.model.Event;
-import com.app.meurole.view.EventDetailActivity;
 
 import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 
+    public interface OnEventClickListener {
+        void onEventClick(String eventId);
+    }
+    private OnEventClickListener listener;
     private Context context;
     private List<Event> eventList;
 
-    public EventAdapter(Context context, List<Event> eventList) {
+    public EventAdapter(Context context, List<Event> eventList, OnEventClickListener listener) {
         this.context = context;
         this.eventList = eventList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -42,15 +44,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         holder.textViewLocal.setText(event.getLocal());
         holder.textViewData.setText(event.getData());
 
-        // Clique em cada item da lista
         holder.itemView.setOnClickListener(v -> {
-            // Pode colocar um Toast de teste
-            Toast.makeText(context, "Evento selecionado: " + event.getNome(), Toast.LENGTH_SHORT).show();
-
-            // Iniciando a Activity de detalhes e passando o ID do evento via Intent
-            Intent intent = new Intent(context, EventDetailActivity.class);
-            intent.putExtra("EVENT_ID", event.getEventId());
-            context.startActivity(intent);
+            if (listener != null) {
+                listener.onEventClick(event.getEventId());
+            }
         });
     }
 
