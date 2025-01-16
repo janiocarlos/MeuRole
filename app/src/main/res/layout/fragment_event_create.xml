@@ -56,7 +56,7 @@
         android:id="@+id/evento_valor"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:hint="Valor da Inscrição (Ex: 0.00)"
+        android:hint="Valor da Inscrição"
         android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
