@@ -6,6 +6,13 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <ImageView
+        android:id="@+id/imageViewThumbDetails"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Thumbnail Rolê"/>
+
     <!-- Nome do evento -->
     <TextView
         android:id="@+id/textViewDetalheNome"

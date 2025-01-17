@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class EventDetailFragment extends Fragment {
 
     private static final String ARG_EVENT_ID = "EVENT_ID";
     private TextView textViewNome, textViewData, textViewLocal, textViewValor;
+    private ImageView imageViewThumb;
     private Button buttonConfirmarInscricao;
     private ActivityResultLauncher<Intent> loginActivityResultLauncher;
 
@@ -66,10 +68,12 @@ public class EventDetailFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_event_detail, container, false);
 
+
         textViewNome  = view.findViewById(R.id.textViewDetalheNome);
         textViewData  = view.findViewById(R.id.textViewDetalheData);
         textViewLocal = view.findViewById(R.id.textViewDetalheLocal);
         textViewValor = view.findViewById(R.id.textViewDetalheValor);
+        imageViewThumb = view.findViewById(R.id.imageViewThumb);
         buttonConfirmarInscricao = view.findViewById(R.id.buttonConfirmarInscricao);
         String eventId = getArguments() != null ? getArguments().getString("EVENT_ID") : null;
 
@@ -137,6 +141,7 @@ public class EventDetailFragment extends Fragment {
                     textViewNome.setText(event.getNome());
                     textViewData.setText(event.getData());
                     textViewLocal.setText(event.getLocal());
+
 
                     // Convertendo double para String
                     String valorText = String.valueOf(event.getValorInscricao());
