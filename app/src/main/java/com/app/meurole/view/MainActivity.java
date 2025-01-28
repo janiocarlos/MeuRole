@@ -1,4 +1,5 @@
 package com.app.meurole.view;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,6 +11,7 @@ import com.app.meurole.R;
 import com.app.meurole.view.fragment.EventCreateFragment;
 import com.app.meurole.view.fragment.EventDetailFragment;
 import com.app.meurole.view.fragment.EventListFragment;
+import com.app.meurole.view.fragment.UserProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,6 +44,21 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new EventListFragment();
             } else if (itemId == R.id.menu_meus_eventos) {
                 fragment = new EventCreateFragment();
+            }
+            else if (itemId == R.id.menu_user_profile) {
+                // Verificar se está logado
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user == null) {
+                    // Não logado -> vai para UserLoginActivity
+                    Intent intent = new Intent(MainActivity.this, UserLoginActivity.class);
+                    // Se quiser, informe que depois do login deve abrir o perfil
+                    intent.putExtra("FRAGMENT_TO_OPEN", "USER_PROFILE");
+                    startActivity(intent);
+                    return false; // não carrega fragment
+                } else {
+                    // Logado -> carrega o UserProfileFragment
+                    fragment = new UserProfileFragment();
+                }
             }
 
             if (fragment != null) {

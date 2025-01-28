@@ -85,28 +85,29 @@ public class UserLoginActivity extends AppCompatActivity {
                 senha = senha_login.getText().toString();
 
                 auth.signInWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Recuperamos o eventId que recebemos
-                                    String eventId = getIntent().getStringExtra("EVENT_ID");
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Recuperar o EVENT_ID que eventualmente veio da Intent
+                            String eventId = getIntent().getStringExtra("EVENT_ID");
+                            // Recuperar FRAGMENT_TO_OPEN, ex.: "USER_PROFILE"
+                            String fragmentToOpen = getIntent().getStringExtra("FRAGMENT_TO_OPEN");
 
-                                    // Criamos a Intent para devolver ao Fragment
-                                    Intent returnIntent = new Intent();
-                                    returnIntent.putExtra("EVENT_ID", eventId);
+                            // Retornamos ambos ao chamador
+                            Intent returnIntent = new Intent();
+                            returnIntent.putExtra("EVENT_ID", eventId);
+                            returnIntent.putExtra("FRAGMENT_TO_OPEN", fragmentToOpen);
 
-                                    // Devolvemos RESULT_OK
-                                    setResult(Activity.RESULT_OK, returnIntent);
+                            setResult(Activity.RESULT_OK, returnIntent);
+                            finish(); // Fecha UserLoginActivity, volta para quem chamou // fecha a UserLoginActivity e volta para o Fragment que chamou
 
-                                    finish(); // fecha a UserLoginActivity e volta para o Fragment que chamou
-
-                                } else {
-                                    Toast.makeText(getApplicationContext(),
-                                            "Erro no login: " + task.getException().getMessage(),
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                        } else {
+                            Toast.makeText(getApplicationContext(),
+                                    "Erro no login: " + task.getException().getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
     }
