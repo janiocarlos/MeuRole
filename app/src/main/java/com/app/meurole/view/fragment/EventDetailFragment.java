@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.app.meurole.R;
 import com.app.meurole.model.Event;
 import com.app.meurole.view.UserLoginActivity;
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +30,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -41,8 +45,8 @@ public class EventDetailFragment extends Fragment {
 
 
     private static final String ARG_EVENT_ID = "EVENT_ID";
-    private TextView textViewNome, textViewData, textViewLocal, textViewValor;
-    private ImageView imageViewThumb;
+    private TextView textViewNome, textViewData, textViewLocal, textViewValor, textViewTipo;
+    private ImageView imageViewEventThumb;
     private Button buttonConfirmarInscricao;
     private ActivityResultLauncher<Intent> loginActivityResultLauncher;
 
@@ -69,11 +73,14 @@ public class EventDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_event_detail, container, false);
 
 
-        textViewNome  = view.findViewById(R.id.textViewDetalheNome);
-        textViewData  = view.findViewById(R.id.textViewDetalheData);
-        textViewLocal = view.findViewById(R.id.textViewDetalheLocal);
-        textViewValor = view.findViewById(R.id.textViewDetalheValor);
-        imageViewThumb = view.findViewById(R.id.imageViewThumb);
+        imageViewEventThumb     = view.findViewById(R.id.imageViewEventThumb);
+        textViewNome            = view.findViewById(R.id.textViewDetalheNome);
+        textViewData            = view.findViewById(R.id.textViewDetalheData);
+        textViewLocal           = view.findViewById(R.id.textViewDetalheLocal);
+        textViewTipo            = view.findViewById(R.id.textViewDetalheTipo); // novo campo
+        textViewValor           = view.findViewById(R.id.textViewDetalheValor);
+        buttonConfirmarInscricao= view.findViewById(R.id.buttonConfirmarInscricao);
+
         buttonConfirmarInscricao = view.findViewById(R.id.buttonConfirmarInscricao);
         String eventId = getArguments() != null ? getArguments().getString("EVENT_ID") : null;
 
@@ -139,13 +146,28 @@ public class EventDetailFragment extends Fragment {
 
                 if (event != null) {
                     textViewNome.setText(event.getNome());
-                    textViewData.setText(event.getData());
                     textViewLocal.setText(event.getLocal());
+                    textViewTipo.setText(event.getTipo());
 
+                    Date dataEvento = event.getData();
+                    if (dataEvento != null) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                        String dataStr = sdf.format(dataEvento);
+                        textViewData.setText(dataStr);
+                    } else {
+                        textViewData.setText("Data não cadastrada");
+                    }
 
-                    // Convertendo double para String
+                    // Formata valor
                     String valorText = String.valueOf(event.getValorInscricao());
                     textViewValor.setText("R$ " + valorText);
+
+                    // Carrega imagem do evento (thumbUrl), se existir
+                    if (event.getThumbUrl() != null && !event.getThumbUrl().isEmpty()) {
+                        Glide.with(requireContext())
+                                .load(event.getThumbUrl())     // se tiver um drawable de erro
+                                .into(imageViewEventThumb);
+                    }
                 } else {
                     Toast.makeText(requireContext(),
                             "Não foi possível encontrar o evento",

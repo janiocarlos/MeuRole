@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -31,13 +33,19 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class EventCreateFragment extends Fragment {
 
     private EditText evento_nome, evento_data, evento_local, evento_valor;
     private Spinner evento_tipo;
+    private TextView evento_texto_sem_imagem;
     private Button evento_botao_cadastrar, evento_botao_thumb;
+    private ImageView evento_imagem_preview;
 
     // Referências de Firebase
     private DatabaseReference eventsRef;
@@ -52,10 +60,15 @@ public class EventCreateFragment extends Fragment {
                     result -> {
                         if (result.getResultCode() == getActivity().RESULT_OK && result.getData() != null) {
                             uriThumb = result.getData().getData();
+                            evento_imagem_preview.setImageURI(uriThumb);
+                            evento_imagem_preview.setVisibility(View.VISIBLE);
+                            evento_texto_sem_imagem.setVisibility(View.GONE);
                         } else {
                             Toast.makeText(requireContext(),
                                     "Nenhuma imagem selecionada",
                                     Toast.LENGTH_SHORT).show();
+                            evento_imagem_preview.setVisibility(View.GONE);
+                            evento_texto_sem_imagem.setVisibility(View.VISIBLE);
                         }
                     });
 
@@ -80,6 +93,9 @@ public class EventCreateFragment extends Fragment {
         evento_botao_thumb = view.findViewById(R.id.evento_botao_thumb);
         evento_botao_cadastrar = view.findViewById(R.id.evento_botao_cadastrar);
 
+        evento_imagem_preview = view.findViewById(R.id.evento_imagem_preview);
+        evento_texto_sem_imagem = view.findViewById(R.id.evento_texto_sem_imagem);
+
         eventsRef = FirebaseDatabase.getInstance().getReference("eventos");
         eventsStorage = FirebaseStorage.getInstance().getReference();
 
@@ -103,6 +119,8 @@ public class EventCreateFragment extends Fragment {
                         },
                         year, month, day
                 );
+
+                datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
 
                 // Exibir o DatePickerDialog
                 datePicker.show();
@@ -188,6 +206,17 @@ public class EventCreateFragment extends Fragment {
             return;
         }
 
+        Date dateObj = null;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            dateObj = sdf.parse(dataEvento);
+        } catch (ParseException e) {
+            evento_data.setError("Data inválida. Use o formato dd/MM/yyyy");
+            evento_data.requestFocus();
+            return;
+        }
+
+
         // Gera a chave (eventId)
         String generatedKey = eventsRef.push().getKey();
         if (generatedKey == null) {
@@ -200,11 +229,11 @@ public class EventCreateFragment extends Fragment {
         Event newEvent = new Event(
                 generatedKey,
                 nomeEvento,
-                dataEvento,
+                dateObj,        // Passa Date, não string
                 localEvento,
                 tipoEvento,
                 valorInscricao,
-                uriThumb  // URL da imagem
+                uriThumb
         );
 
         eventsRef.child(generatedKey)
@@ -234,5 +263,7 @@ public class EventCreateFragment extends Fragment {
         evento_local.setText("");
         evento_valor.setText("");
         uriThumb = null;
+        evento_imagem_preview.setVisibility(View.GONE);
+        evento_texto_sem_imagem.setVisibility(View.VISIBLE);
     }
 }

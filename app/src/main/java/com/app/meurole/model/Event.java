@@ -1,9 +1,11 @@
 package com.app.meurole.model;
 
+import java.util.Date;
+
 public class Event {
     private String eventId;
     private String nome;
-    private String data;
+    private Long dataInMillis;
     private String local;
     private String tipo;
     private double valorInscricao;
@@ -13,10 +15,10 @@ public class Event {
     public Event() {
     }
 
-    public Event(String eventId, String nome, String data, String local, String tipo, double valorInscricao, String thumbUrl) {
+    public Event(String eventId, String nome, Date data, String local, String tipo, double valorInscricao, String thumbUrl) {
         this.eventId = eventId;
         this.nome = nome;
-        this.data = data;
+        setData(data);
         this.local = local;
         this.tipo = tipo;
         this.valorInscricao = valorInscricao;
@@ -39,12 +41,19 @@ public class Event {
         this.nome = nome;
     }
 
-    public String getData() {
-        return data;
+    public Date getData() {
+        if (dataInMillis == null) {
+            return null;
+        }
+        return new Date(dataInMillis);
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setData(Date data) {
+        if (data != null) {
+            this.dataInMillis = data.getTime(); // Armazena em milissegundos
+        } else {
+            this.dataInMillis = null;
+        }
     }
 
     public String getLocal() {

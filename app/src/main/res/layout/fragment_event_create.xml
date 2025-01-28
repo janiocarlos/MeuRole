@@ -1,112 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/titulo_evento_cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Criar Rolê"
-        android:textSize="28dp"
-        android:textStyle="bold"
-        android:textColor="@color/primary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="30dp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/evento_nome"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:hint="Nome do Rolê"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titulo_evento_cadastro"
-        android:layout_marginTop="20dp"
-        />
+        <TextView
+            android:id="@+id/titulo_evento_cadastro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Criar Rolê"
+            android:textSize="28dp"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="30dp" />
 
-    <EditText
-        android:id="@+id/evento_data"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:hint="Data do rolê"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/evento_nome"
-        android:layout_marginTop="20dp"
-        />
+        <ImageView
+            android:id="@+id/evento_imagem_preview"
+            android:layout_width="320dp"
+            android:layout_height="210dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            android:contentDescription="imagem_do_evento"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titulo_evento_cadastro"
+            android:layout_marginTop="30dp" />
 
-<EditText
-        android:id="@+id/evento_local"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:hint="Local do rolê"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/evento_data"
-        android:layout_marginTop="20dp"
-        />
+        <TextView
+            android:id="@+id/evento_texto_sem_imagem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nenhuma imagem selecionada!"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/evento_imagem_preview"
+            android:layout_marginTop="30dp" />
 
-    <EditText
-        android:id="@+id/evento_valor"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:hint="Valor da Inscrição"
-        android:inputType="numberDecimal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/evento_local"
-        android:layout_marginTop="20dp"
-        />
+        <Button
+            android:id="@+id/evento_botao_thumb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selecionar Imagem"
+            android:backgroundTint="@color/primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/evento_texto_sem_imagem"
+            android:layout_marginTop="30dp" />
 
-    <Spinner
-        android:id="@+id/evento_tipo"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:entries="@array/spinnerItems"
-        android:spinnerMode="dropdown"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/evento_valor"
-        tools:ignore="MissingConstraints" />
+        <EditText
+            android:id="@+id/evento_nome"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:hint="Nome do Rolê"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/evento_botao_thumb"
+            android:layout_marginTop="20dp" />
 
-    <TextView
-        android:id="@+id/labelThumb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nenhuma imagem selecionada!"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/evento_tipo" />
+        <EditText
+            android:id="@+id/evento_data"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:hint="Data do rolê"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/evento_nome"
+            android:layout_marginTop="20dp" />
 
-    <Button
-        android:id="@+id/evento_botao_thumb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Selecionar Imagem"
-        android:backgroundTint="@color/primary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/labelThumb"
-        android:layout_marginTop="30dp" />
+        <EditText
+            android:id="@+id/evento_local"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:hint="Local do rolê"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/evento_data"
+            android:layout_marginTop="20dp" />
 
-    <Button
-        android:id="@+id/evento_botao_cadastrar"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:text="Marcar Rolêrereh"
-        android:backgroundTint="@color/primary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/evento_botao_thumb"
-        android:layout_marginTop="30dp" />
+        <EditText
+            android:id="@+id/evento_valor"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:hint="Valor da Inscrição"
+            android:inputType="numberDecimal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/evento_local"
+            android:layout_marginTop="20dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Spinner
+            android:id="@+id/evento_tipo"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:entries="@array/spinnerItems"
+            android:spinnerMode="dropdown"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/evento_valor"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/evento_botao_cadastrar"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:text="Marcar Rolêrereh"
+            android:backgroundTint="@color/primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/evento_tipo"
+            android:layout_marginTop="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="30dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

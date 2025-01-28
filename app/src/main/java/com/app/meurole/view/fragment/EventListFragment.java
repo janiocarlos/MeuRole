@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.app.meurole.R;
 import com.app.meurole.adapter.EventAdapter;
 import com.app.meurole.model.Event;
+import com.app.meurole.view.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -71,12 +72,27 @@ public class EventListFragment extends Fragment {
             }
         });
 
+        com.google.android.material.floatingactionbutton.FloatingActionButton fabAddEvent = view.findViewById(R.id.fabAddEvent);
+        fabAddEvent.setOnClickListener(v -> {
+            // Navegar para o EventCreateFragment
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new EventCreateFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+
         return view;
     }
 
     private void logoutUser() {
         firebaseAuth.signOut(); // Faz logout do Firebase
         Toast.makeText(requireContext(), "Logout realizado com sucesso", Toast.LENGTH_SHORT).show();
+
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).updateMenuVisibility();
+        }
     }
 
     private void abrirDetalheDoEvento(String eventId) {

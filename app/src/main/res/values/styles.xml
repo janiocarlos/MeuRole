@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tema base -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <!-- Tema personalizado para o DatePickerDialog -->
+    <style name="CustomDatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">#FF4081</item> <!-- Cor do acento -->
+        <item name="colorPrimary">#3F51B5</item> <!-- Cor primária -->
+        <item name="colorPrimaryDark">#303F9F</item> <!-- Cor primária escura -->
+        <item name="android:textColorPrimary">#000000</item> <!-- Cor do texto primário -->
+        <item name="android:background">#FFFFFF</item> <!-- Cor de fundo -->
+    </style>
+</resources>

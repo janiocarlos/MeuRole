@@ -5,11 +5,11 @@
         android:icon="@drawable/ic_home"
         android:title="Início" />
     <item
-        android:id="@+id/menu_criar_eventos"
+        android:id="@+id/menu_meus_eventos"
         android:icon="@drawable/ic_add_box"
         android:title="Criar Eventos" />
     <item
-        android:id="@+id/ingressos"
-        android:icon="@drawable/ic_local_activity"
-        android:title="Ingressos" />
+        android:id="@+id/menu_user_profile"
+        android:icon="@drawable/ic_user"
+        android:title="Perfil" />
 </menu>

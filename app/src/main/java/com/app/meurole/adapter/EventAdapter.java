@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,7 +15,10 @@ import com.app.meurole.R;
 import com.app.meurole.model.Event;
 import com.bumptech.glide.Glide;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 
@@ -44,13 +48,22 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
         holder.textViewNome.setText(event.getNome());
         holder.textViewLocal.setText(event.getLocal());
-        holder.textViewData.setText(event.getData());
+
+        Date dateObj = event.getData();
+        if (dateObj != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            String dataFormatada = sdf.format(dateObj);
+            holder.textViewData.setText(dataFormatada);
+        } else {
+            holder.textViewData.setText("Data Indefinida");
+        }
+
 
         Glide.with(context)
                 .load(event.getThumbUrl())
                 .into(holder.imageViewThumb);
 
-        holder.itemView.setOnClickListener(v -> {
+        holder.buttonVerDetalhes.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onEventClick(event.getEventId());
             }
@@ -65,6 +78,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     public static class EventViewHolder extends RecyclerView.ViewHolder {
         ImageView imageViewThumb;
         TextView textViewNome, textViewLocal, textViewData;
+        Button buttonVerDetalhes;
+
 
         public EventViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,6 +87,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             textViewNome  = itemView.findViewById(R.id.textViewNomeEvento);
             textViewLocal = itemView.findViewById(R.id.textViewLocalEvento);
             textViewData  = itemView.findViewById(R.id.textViewDataEvento);
+            buttonVerDetalhes   = itemView.findViewById(R.id.buttonVerDetalhes);
         }
     }
 

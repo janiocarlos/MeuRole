@@ -1,59 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:fillViewport="true"
     android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/imageViewThumbDetails"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:scaleType="centerCrop"
-        android:contentDescription="Thumbnail Rolê"/>
-
-    <!-- Nome do evento -->
-    <TextView
-        android:id="@+id/textViewDetalheNome"
+    <!-- Conteiner principal -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nome do Evento"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:paddingBottom="8dp"/>
+        android:orientation="vertical">
 
-    <!-- Data do evento -->
-    <TextView
-        android:id="@+id/textViewDetalheData"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Data do Evento"
-        android:textSize="16sp"
-        android:paddingBottom="4dp"/>
+        <!-- Imagem grande no topo -->
+        <ImageView
+            android:id="@+id/imageViewEventThumb"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:contentDescription="Imagem do evento"
+            android:background="@color/primary"
+            />
 
-    <!-- Local do evento -->
-    <TextView
-        android:id="@+id/textViewDetalheLocal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Local do Evento"
-        android:textSize="16sp"
-        android:paddingBottom="4dp"/>
+        <!-- Card com detalhes do evento -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardUseCompatPadding="true"
+            android:elevation="4dp"
+            android:background="?android:attr/colorBackground">
 
-    <!-- Valor da inscrição -->
-    <TextView
-        android:id="@+id/textViewDetalheValor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Valor da Inscrição"
-        android:textSize="16sp"
-        android:paddingBottom="8dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-    <!-- Botão para confirmar inscrição -->
-    <Button
-        android:id="@+id/buttonConfirmarInscricao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Confirmar Inscrição"/>
-</LinearLayout>
+                <!-- Nome do Evento -->
+                <TextView
+                    android:id="@+id/textViewDetalheNome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nome do Evento"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="8dp"/>
+
+                <!-- Data do Evento -->
+                <TextView
+                    android:id="@+id/textViewDetalheData"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Data do Evento"
+                    android:textSize="16sp"
+                    android:paddingBottom="4dp"/>
+
+                <!-- Local do Evento -->
+                <TextView
+                    android:id="@+id/textViewDetalheLocal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Local do Evento"
+                    android:textSize="16sp"
+                    android:paddingBottom="4dp"/>
+
+                <!-- Tipo do Evento -->
+                <TextView
+                    android:id="@+id/textViewDetalheTipo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tipo do Evento"
+                    android:textSize="16sp"
+                    android:paddingBottom="4dp"/>
+
+                <!-- Valor do Evento -->
+                <TextView
+                    android:id="@+id/textViewDetalheValor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Valor da Inscrição"
+                    android:textSize="16sp"
+                    android:paddingBottom="8dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Botão para confirmar inscrição -->
+        <Button
+            android:id="@+id/buttonConfirmarInscricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Confirmar Inscrição"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/primary"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:drawablePadding="8dp"
+            android:paddingVertical="12dp"
+            android:elevation="2dp"/>
+
+    </LinearLayout>
+</ScrollView>
