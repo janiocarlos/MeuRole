@@ -10,12 +10,13 @@ public class Event {
     private String tipo;
     private double valorInscricao;
     private String thumbUrl;
+    private String creatorUid;
 
     // Construtor vazio exigido pelo Firebase
     public Event() {
     }
 
-    public Event(String eventId, String nome, Date data, String local, String tipo, double valorInscricao, String thumbUrl) {
+    public Event(String eventId, String nome, Date data, String local, String tipo, double valorInscricao, String thumbUrl, String creatorUid) {
         this.eventId = eventId;
         this.nome = nome;
         setData(data);
@@ -23,6 +24,7 @@ public class Event {
         this.tipo = tipo;
         this.valorInscricao = valorInscricao;
         this.thumbUrl = thumbUrl;
+        this.creatorUid = creatorUid;
     }
 
     public String getEventId() {
@@ -86,5 +88,13 @@ public class Event {
 
     public void setThumbUrl(String thumbUrl) {
         this.thumbUrl = thumbUrl;
+    }
+
+    public String getCreatorUid() {
+        return creatorUid;
+    }
+
+    public void setCreatorUid(String creatorUid) {
+        this.creatorUid = creatorUid;
     }
 }

@@ -27,6 +27,8 @@ import com.app.meurole.view.UserCreateActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -216,6 +218,17 @@ public class EventCreateFragment extends Fragment {
             return;
         }
 
+        // Obter UID do usuário logado
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null) {
+            Toast.makeText(requireContext(),
+                    "Erro: Usuário não está logado!",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String userUid = currentUser.getUid();
+
 
         // Gera a chave (eventId)
         String generatedKey = eventsRef.push().getKey();
@@ -233,7 +246,8 @@ public class EventCreateFragment extends Fragment {
                 localEvento,
                 tipoEvento,
                 valorInscricao,
-                uriThumb
+                uriThumb,
+                userUid
         );
 
         eventsRef.child(generatedKey)
