@@ -1,7 +1,26 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.MeuRole" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-    </style>
+<!-- Tema Escuro -->
+<style name="Base.Theme.MeuRole" parent="Theme.Material3.DayNight.NoActionBar">
+    <!-- Cor primária -->
+    <item name="colorPrimary">@color/primary</item>
+    <item name="colorPrimaryVariant">#388E3C</item>
+    <item name="colorOnPrimary">@color/black</item> <!-- Preto para melhor contraste -->
+
+    <!-- Cor secundária (destaque) -->
+    <item name="colorSecondary">@color/red</item>
+    <item name="colorOnSecondary">@color/black</item>
+
+    <!-- Fundo e superfície -->
+    <item name="android:colorBackground">#121212</item> <!-- Preto puro para modo escuro -->
+    <item name="colorSurface">#1E1E1E</item> <!-- Cinza escuro para contraste -->
+    <item name="colorOnSurface">@color/white</item>
+
+    <!-- Cor de erro -->
+    <item name="colorError">#EF5350</item>
+    <item name="colorOnError">@color/black</item>
+
+    <!-- Cores para botões -->
+    <item name="android:buttonStyle">@style/Widget.MaterialComponents.Button</item>
+    <item name="android:textColorPrimary">@color/white</item>
+</style>
 </resources>

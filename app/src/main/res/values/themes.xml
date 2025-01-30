@@ -1,9 +1,27 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.MeuRole" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-    </style>
+<!-- Tema principal -->
+<style name="Base.Theme.MeuRole" parent="Theme.Material3.DayNight.NoActionBar">
+    <!-- Cor primária -->
+    <item name="colorPrimary">@color/primary</item>
+    <item name="colorPrimaryVariant">#388E3C</item> <!-- Variante mais escura -->
+    <item name="colorOnPrimary">@color/white</item> <!-- Cor do texto sobre primary -->
 
-    <style name="Theme.MeuRole" parent="Base.Theme.MeuRole" />
+    <!-- Cor secundária (destaque) -->
+    <item name="colorSecondary">@color/red</item>
+    <item name="colorOnSecondary">@color/white</item>
+
+    <!-- Fundo e superfície -->
+    <item name="android:colorBackground">@color/white</item>
+    <item name="colorSurface">#F5F5F5</item> <!-- Fundo de cards -->
+    <item name="colorOnSurface">@color/black</item>
+
+    <!-- Cor de erro -->
+    <item name="colorError">#D32F2F</item>
+    <item name="colorOnError">@color/white</item>
+
+    <!-- Cores para botões -->
+    <item name="android:buttonStyle">@style/Widget.MaterialComponents.Button</item>
+    <item name="android:textColorPrimary">@color/black</item>
+</style>
+<style name="Theme.MeuRole" parent="Base.Theme.MeuRole" />
 </resources>

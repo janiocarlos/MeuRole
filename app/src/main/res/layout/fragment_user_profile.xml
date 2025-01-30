@@ -2,57 +2,139 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textViewPerfilTitulo"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Meu Perfil"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp">
 
-        <!-- Nome -->
-        <TextView
-            android:id="@+id/textViewPerfilNome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nome: ... "
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-        <!-- CPF -->
-        <TextView
-            android:id="@+id/textViewPerfilCPF"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="CPF: ... "
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
+                <!-- 🔹 Ícone de perfil -->
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_perfil"
+                    app:tint="@color/primary"
+                    android:layout_marginBottom="12dp"/>
 
-        <!-- Data de Nascimento -->
-        <TextView
-            android:id="@+id/textViewPerfilDataNasc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Data de Nasc.: ... "
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
+                <!-- 🔹 Título "Meu Perfil" -->
+                <TextView
+                    android:id="@+id/textViewPerfilTitulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Meu Perfil"
+                    android:textColor="@color/primary"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
 
-        <!-- Email -->
-        <TextView
-            android:id="@+id/textViewPerfilEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Email: ... "
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
+                <!-- 🔹 Informações dentro do Card -->
+                <!-- Nome -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_person"
+                        app:tint="@color/primary"
+                        android:layout_marginEnd="8dp"/>
+
+                    <TextView
+                        android:id="@+id/textViewPerfilNome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nome: Daniel"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <!-- CPF -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_id"
+                        app:tint="@color/primary"
+                        android:layout_marginEnd="8dp"/>
+
+                    <TextView
+                        android:id="@+id/textViewPerfilCPF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CPF: 07385425137"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <!-- Data de Nascimento -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_calendar"
+                        app:tint="@color/primary"
+                        android:layout_marginEnd="8dp"/>
+
+                    <TextView
+                        android:id="@+id/textViewPerfilDataNasc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Data de Nasc.: 23/06/2003"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <!-- Email -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_email"
+                        app:tint="@color/primary"
+                        android:layout_marginEnd="8dp"/>
+
+                    <TextView
+                        android:id="@+id/textViewPerfilEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email: teste@gmail.com"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <!-- Lista de eventos criados -->
         <TextView
@@ -75,7 +157,7 @@
             android:id="@+id/indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:spi_dotColor="@color/primary"
+            app:spi_dotSelectedColor="@color/primary"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
             />
