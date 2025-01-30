@@ -1,0 +1,25 @@
+<resources>
+
+    <!-- Cores principais no modo escuro -->
+    <color name="md_theme_light_primary">#4CAF50</color>
+    <color name="md_theme_light_onPrimary">#003912</color>
+
+    <color name="md_theme_light_secondary">#4CCA8C</color>
+    <color name="md_theme_light_onSecondary">#003920</color>
+
+    <color name="md_theme_light_background">#1B1B1F</color>
+    <color name="md_theme_light_onBackground">#E2E2E6</color>
+
+    <color name="md_theme_light_surface">#1B1B1F</color>
+    <color name="md_theme_light_onSurface">#E2E2E6</color>
+
+    <!-- Exemplo de erro -->
+    <color name="md_theme_light_error">#F2B8B5</color>
+    <color name="md_theme_light_onError">#601410</color>
+
+    <!-- Mantendo extras -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="red">#EF3A29</color>
+
+</resources>

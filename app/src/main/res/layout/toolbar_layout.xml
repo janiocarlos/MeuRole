@@ -4,7 +4,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 android:id="@+id/toolbar"
 android:layout_width="match_parent"
 android:layout_height="40dp"
-android:background="@color/primary"
+android:background="@color/md_theme_light_primary"
 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
 <!-- Layout para centralizar a logo -->

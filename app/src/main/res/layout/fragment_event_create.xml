@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:theme="@style/Theme.MeuRole">
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- Título -->
         <TextView
             android:id="@+id/titulo_evento_cadastro"
             android:layout_width="wrap_content"
@@ -18,12 +19,13 @@
             android:text="Criar Rolê"
             android:textSize="28dp"
             android:textStyle="bold"
-            android:textColor="@color/primary"
+            android:textColor="@color/md_theme_light_primary"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="30dp" />
 
+        <!-- Imagem (preview) -->
         <ImageView
             android:id="@+id/evento_imagem_preview"
             android:layout_width="320dp"
@@ -31,11 +33,12 @@
             android:scaleType="centerCrop"
             android:visibility="gone"
             android:contentDescription="imagem_do_evento"
+            app:layout_constraintTop_toBottomOf="@id/titulo_evento_cadastro"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titulo_evento_cadastro"
             android:layout_marginTop="30dp" />
 
+        <!-- Texto “Nenhuma imagem selecionada!” -->
         <TextView
             android:id="@+id/evento_texto_sem_imagem"
             android:layout_width="wrap_content"
@@ -43,117 +46,138 @@
             android:text="Nenhuma imagem selecionada!"
             android:textSize="16dp"
             android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/evento_imagem_preview"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/evento_imagem_preview"
             android:layout_marginTop="30dp" />
 
+        <!-- Botão Selecionar Imagem -->
         <Button
             android:id="@+id/evento_botao_thumb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Selecionar Imagem"
-            android:backgroundTint="@color/primary"
-            android:textColor="@color/white"
+            android:backgroundTint="@color/md_theme_light_primary"
+            android:textColor="@android:color/white"
+            app:layout_constraintTop_toBottomOf="@id/evento_texto_sem_imagem"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/evento_texto_sem_imagem"
             android:layout_marginTop="30dp" />
 
+        <!-- Nome do Evento (Material Textfield) -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputNomeRole"
-            android:layout_width="320dp"
+            android:id="@+id/inputEventoNome"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:boxStrokeColor="@color/primary"
-            app:hintTextColor="@color/primary"
+            android:hint="Nome do Rolê"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox"
+            app:boxStrokeColor="@color/md_theme_light_primary"
+            app:hintTextColor="@color/md_theme_light_primary"
+            app:layout_constraintTop_toBottomOf="@id/evento_botao_thumb"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/evento_botao_thumb"
-            >
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="20dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/evento_nome"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nome do Rolê"/>
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Data do Rolê -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputDataRole"
-            android:layout_width="320dp"
+            android:id="@+id/inputEventoData"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:boxStrokeColor="@color/primary"
-            app:hintTextColor="@color/primary"
+            android:hint="Data do rolê"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox"
+            app:boxStrokeColor="@color/md_theme_light_primary"
+            app:hintTextColor="@color/md_theme_light_primary"
+            app:layout_constraintTop_toBottomOf="@id/inputEventoNome"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/inputNomeRole"
-            >
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="20dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/evento_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Data do rolê"/>
+                android:focusable="false"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Local do Rolê -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputLocalRole"
-            android:layout_width="320dp"
+            android:id="@+id/inputEventoLocal"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:boxStrokeColor="@color/primary"
-            app:hintTextColor="@color/primary"
+            android:hint="Local do rolê"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox"
+            app:boxStrokeColor="@color/md_theme_light_primary"
+            app:hintTextColor="@color/md_theme_light_primary"
+            app:layout_constraintTop_toBottomOf="@id/inputEventoData"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/inputDataRole"
-            >
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="20dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/evento_local"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Local do rolê"/>
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Valor da Inscrição (já estava com TextInputLayout) -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputValorRole"
-            android:layout_width="320dp"
+            android:id="@+id/inputValor"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:boxStrokeColor="@color/primary"
-            app:hintTextColor="@color/primary"
+            android:hint="Valor da Inscrição"
+            android:inputType="numberDecimal"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox"
+            app:boxStrokeColor="@color/md_theme_light_primary"
+            app:hintTextColor="@color/md_theme_light_primary"
+            app:layout_constraintTop_toBottomOf="@id/inputEventoLocal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/inputDataRole">
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="20dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/evento_valor"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"/>
+                android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Spinner do tipo de evento -->
         <Spinner
             android:id="@+id/evento_tipo"
-            android:layout_width="320dp"
-            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:entries="@array/spinnerItems"
             android:spinnerMode="dropdown"
+            app:layout_constraintTop_toBottomOf="@id/inputValor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/inputValorRole"/>
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="16dp"/>
 
+        <!-- Botão Marcar Rolê -->
         <Button
             android:id="@+id/evento_botao_cadastrar"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Marcar Rolê"
-            android:backgroundTint="@color/primary"
-            android:textColor="@color/white"
+            android:backgroundTint="@color/md_theme_light_primary"
+            android:textColor="@android:color/white"
+            app:layout_constraintTop_toBottomOf="@id/evento_tipo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/evento_tipo"
             android:layout_marginTop="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="30dp" />
+            android:layout_marginBottom="30dp"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

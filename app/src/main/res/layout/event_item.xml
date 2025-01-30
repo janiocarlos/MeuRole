@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:text="Nome do Evento"
             android:textStyle="bold"
-            android:textColor="@color/primary"
+            android:textColor="@color/md_theme_light_primary"
             android:textSize="22sp"
             android:paddingTop="8dp"/>
 
@@ -46,7 +46,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_location"
-                app:tint="@color/primary" />
+                app:tint="@color/md_theme_light_primary" />
 
             <TextView
                 android:id="@+id/textViewLocalEvento"
@@ -69,7 +69,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_date_range"
-                app:tint="@color/primary" />
+                app:tint="@color/md_theme_light_primary" />
 
             <TextView
                 android:id="@+id/textViewDataEvento"
@@ -88,7 +88,7 @@
             android:text="Ver detalhes"
             android:layout_gravity="end"
             android:layout_marginTop="8dp"
-            android:backgroundTint="@color/primary"
+            android:backgroundTint="@color/md_theme_light_primary"
             android:textColor="@android:color/white"/>
 
     </LinearLayout>

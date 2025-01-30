@@ -1,26 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-<!-- Tema Escuro -->
-<style name="Base.Theme.MeuRole" parent="Theme.Material3.DayNight.NoActionBar">
-    <!-- Cor primária -->
-    <item name="colorPrimary">@color/primary</item>
-    <item name="colorPrimaryVariant">#388E3C</item>
-    <item name="colorOnPrimary">@color/black</item> <!-- Preto para melhor contraste -->
+    <!-- Base application theme. -->
+    <style name="Base.Theme.MeuRole" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+        <item name="colorSecondary">@color/md_theme_light_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
 
-    <!-- Cor secundária (destaque) -->
-    <item name="colorSecondary">@color/red</item>
-    <item name="colorOnSecondary">@color/black</item>
-
-    <!-- Fundo e superfície -->
-    <item name="android:colorBackground">#121212</item> <!-- Preto puro para modo escuro -->
-    <item name="colorSurface">#1E1E1E</item> <!-- Cinza escuro para contraste -->
-    <item name="colorOnSurface">@color/white</item>
-
-    <!-- Cor de erro -->
-    <item name="colorError">#EF5350</item>
-    <item name="colorOnError">@color/black</item>
-
-    <!-- Cores para botões -->
-    <item name="android:buttonStyle">@style/Widget.MaterialComponents.Button</item>
-    <item name="android:textColorPrimary">@color/white</item>
-</style>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:navigationBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+    </style>
 </resources>
