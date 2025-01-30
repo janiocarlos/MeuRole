@@ -18,11 +18,14 @@ import com.app.meurole.R;
 import com.app.meurole.adapter.EventAdapter;
 import com.app.meurole.model.Event;
 import com.app.meurole.view.MainActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,41 +35,32 @@ public class EventListFragment extends Fragment {
     private RecyclerView recyclerViewEventos;
     private EventAdapter eventAdapter;
     private List<Event> eventList = new ArrayList<>();
-    private FirebaseAuth firebaseAuth;
-
     private DatabaseReference eventsRef;
+    private FloatingActionButton fabAddEvent;
 
     public EventListFragment() {
-        // Construtor vazio exigido pelo Fragment
+        // Construtor vazio
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // "Inflando" o layout do fragment (fragment_event_list.xml)
         View view = inflater.inflate(R.layout.fragment_event_list, container, false);
         recyclerViewEventos = view.findViewById(R.id.recyclerViewEventos);
-
-        // Configura o RecyclerView (similar ao que você fazia no onCreate da Activity)
         recyclerViewEventos.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+        // Adapter, etc.
         eventAdapter = new EventAdapter(requireContext(), eventList, eventId -> {
-            // Aqui chamamos um método para trocar para o EventDetailFragment
             abrirDetalheDoEvento(eventId);
         });
-
         recyclerViewEventos.setAdapter(eventAdapter);
 
-        // Inicializar referência do Firebase
-        eventsRef = FirebaseDatabase.getInstance().getReference("eventos");
-
-        // Carregar lista de eventos
-        carregarEventos();
-
-
-        com.google.android.material.floatingactionbutton.FloatingActionButton fabAddEvent = view.findViewById(R.id.fabAddEvent);
+        // FAB
+        fabAddEvent = view.findViewById(R.id.fabAddEvent);
+        // Clique do FAB (caso o usuário esteja logado; mas vamos controlar a visibilidade em onResume)
         fabAddEvent.setOnClickListener(v -> {
-            // Navegar para o EventCreateFragment
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, new EventCreateFragment())
@@ -74,14 +68,33 @@ public class EventListFragment extends Fragment {
                     .commit();
         });
 
+        // Carregar eventos do Firebase
+        eventsRef = FirebaseDatabase.getInstance().getReference("eventos");
+        carregarEventos();
 
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Sempre que o fragment voltar ao primeiro plano, checamos login
+        checkUserLoginAndUpdateFab();
+    }
+
+    private void checkUserLoginAndUpdateFab() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null) {
+            // Usuário não logado -> oculta FAB
+            fabAddEvent.setVisibility(View.GONE);
+        } else {
+            // Usuário logado -> exibe FAB
+            fabAddEvent.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void abrirDetalheDoEvento(String eventId) {
-
         EventDetailFragment fragment = EventDetailFragment.newInstance(eventId);
-
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
@@ -90,11 +103,10 @@ public class EventListFragment extends Fragment {
     }
 
     private void carregarEventos() {
-        eventsRef.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
+        eventsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 eventList.clear();
-
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Event event = snapshot.getValue(Event.class);
                     if (event != null) {
@@ -110,7 +122,6 @@ public class EventListFragment extends Fragment {
                 Toast.makeText(requireContext(),
                         "Erro ao carregar eventos: " + databaseError.getMessage(),
                         Toast.LENGTH_SHORT).show();
-                Log.e("EventListFragment", "onCancelled: " + databaseError.getMessage());
             }
         });
     }
