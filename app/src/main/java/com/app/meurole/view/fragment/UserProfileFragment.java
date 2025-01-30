@@ -1,5 +1,6 @@
 package com.app.meurole.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import com.app.meurole.adapter.UserEventAdapter;
 import com.app.meurole.model.Event;
 import com.app.meurole.model.User;
 import com.app.meurole.view.MainActivity;
+import com.app.meurole.view.UserLoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -183,5 +185,10 @@ public class UserProfileFragment extends Fragment {
         if (getActivity() instanceof MainActivity) {
             ((MainActivity) getActivity()).updateMenuVisibility();
         }
+        EventListFragment fragment = new EventListFragment();
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
     }
 }

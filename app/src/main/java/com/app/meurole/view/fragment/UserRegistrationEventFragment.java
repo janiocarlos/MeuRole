@@ -69,27 +69,23 @@ public class UserRegistrationEventFragment extends Fragment {
     }
 
     private void carregarEventosInscritos(String userUid) {
-        inscricoesRef = FirebaseDatabase.getInstance().getReference("inscricoes").child(userUid);
+        inscricoesRef = FirebaseDatabase.getInstance().getReference("inscricoes");
 
         inscricoesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 eventosInscritosList.clear();
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        String eventId = snapshot.getKey();
-
-                        // Buscar detalhes do evento
+                for (DataSnapshot eventoSnapshot : dataSnapshot.getChildren()) {
+                    String eventId = eventoSnapshot.getKey();
+                    if (eventoSnapshot.hasChild(userUid)) {
                         carregarDetalhesDoEvento(eventId);
                     }
-                } else {
-                    Toast.makeText(requireContext(), "Nenhum evento encontrado", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(requireContext(), "Erro ao carregar eventos inscritos: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Erro ao carregar eventos inscritos", Toast.LENGTH_SHORT).show();
             }
         });
     }
