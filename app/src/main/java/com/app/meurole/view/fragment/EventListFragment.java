@@ -63,14 +63,6 @@ public class EventListFragment extends Fragment {
         // Carregar lista de eventos
         carregarEventos();
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        Button btnSigout = view.findViewById(R.id.btnSigout);
-        btnSigout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logoutUser();
-            }
-        });
 
         com.google.android.material.floatingactionbutton.FloatingActionButton fabAddEvent = view.findViewById(R.id.fabAddEvent);
         fabAddEvent.setOnClickListener(v -> {
@@ -84,15 +76,6 @@ public class EventListFragment extends Fragment {
 
 
         return view;
-    }
-
-    private void logoutUser() {
-        firebaseAuth.signOut(); // Faz logout do Firebase
-        Toast.makeText(requireContext(), "Logout realizado com sucesso", Toast.LENGTH_SHORT).show();
-
-        if (getActivity() instanceof MainActivity) {
-            ((MainActivity) getActivity()).updateMenuVisibility();
-        }
     }
 
     private void abrirDetalheDoEvento(String eventId) {

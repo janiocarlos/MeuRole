@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="8dp"
+    android:elevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <!-- Imagem do evento à esquerda -->
+        <ImageView
+            android:id="@+id/imageViewThumb"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:contentDescription="thumb_evento"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Container para os textos -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Nome do evento -->
+            <TextView
+                android:id="@+id/textViewNomeEvento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nome do Evento"
+                android:textStyle="bold"
+                android:textColor="@color/primary"
+                android:textSize="18sp"/>
+
+            <!-- Local do evento -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingTop="4dp">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_location"
+                    app:tint="@color/primary" />
+
+                <TextView
+                    android:id="@+id/textViewLocalEvento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Local do Evento"
+                    android:textSize="14sp"
+                    android:layout_marginStart="4dp"/>
+            </LinearLayout>
+
+            <!-- Data do evento -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingTop="4dp">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_date_range"
+                    app:tint="@color/primary" />
+
+                <TextView
+                    android:id="@+id/textViewDataEvento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Data do Evento"
+                    android:textSize="14sp"
+                    android:layout_marginStart="4dp"/>
+
+
+            </LinearLayout>
+            <!-- Botão "Ver detalhes" -->
+            <Button
+                android:id="@+id/buttonVerDetalhes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ver detalhes"
+                android:layout_gravity="start"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/primary"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
