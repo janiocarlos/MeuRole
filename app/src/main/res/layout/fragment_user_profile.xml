@@ -71,6 +71,15 @@
             android:orientation="horizontal"
             android:nestedScrollingEnabled="false"/>
 
+        <ru.tinkoff.scrollingpagerindicator.ScrollingPagerIndicator
+            android:id="@+id/indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:spi_dotColor="@color/primary"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            />
+
         <Button
         android:id="@+id/btnSigout"
         android:layout_width="wrap_content"

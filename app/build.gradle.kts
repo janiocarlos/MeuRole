@@ -49,5 +49,6 @@ dependencies {
     implementation(libs.firebase.storage)
     implementation (libs.core.splashscreen)
     implementation (libs.glide)
+    implementation ("ru.tinkoff.scrollingpagerindicator:scrollingpagerindicator:1.2.5")
 
 }
