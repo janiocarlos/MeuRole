@@ -12,6 +12,7 @@ import com.app.meurole.view.fragment.EventCreateFragment;
 import com.app.meurole.view.fragment.EventDetailFragment;
 import com.app.meurole.view.fragment.EventListFragment;
 import com.app.meurole.view.fragment.UserProfileFragment;
+import com.app.meurole.view.fragment.UserRegistrationEventFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             if (itemId == R.id.menu_home) {
                 fragment = new EventListFragment();
             } else if (itemId == R.id.menu_meus_eventos) {
-                fragment = new EventCreateFragment();
+                fragment = new UserRegistrationEventFragment();
             }
             else if (itemId == R.id.menu_user_profile) {
                 // Verificar se está logado

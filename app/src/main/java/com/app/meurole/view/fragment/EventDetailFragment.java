@@ -190,7 +190,6 @@ public class EventDetailFragment extends Fragment {
         // Montamos um Map com os caminhos e valores
         Map<String, Object> updates = new HashMap<>();
         updates.put("inscricoes/" + eventId + "/" + userId, true);
-        updates.put("usuarios/" + userId + "/eventosInscritos/" + eventId, true);
 
         // Faz o update em todos esses caminhos de uma vez
         rootRef.updateChildren(updates).addOnCompleteListener(task -> {
